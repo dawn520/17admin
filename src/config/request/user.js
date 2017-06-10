@@ -10,7 +10,7 @@ module.exports = [
 	{
 		name  : '登录',
 		method: 'login',
-		path  : '/Login/login',
+		path  : '/user/login',
 		type  : 'post',
 	},
 	{

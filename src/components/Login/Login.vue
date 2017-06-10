@@ -13,7 +13,7 @@
                         <h3 class="title">
                             <span
                                     :class="[{active:register===false}]"
-                                    @click="toggleStatus(false)">系统登录</span>
+                                    @click="toggleStatus(false)">17duu后台管理系统系统登录</span>
                             <span
                                     :class="[{active:register===true}]"
                                     @click="toggleStatus(true)">注册账号</span>

@@ -22,11 +22,11 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         proxyTable: {
-            '/slsAdminApi': {
-                target: 'http://slsadmin.api.sailengsi.com',
+            '/api': {
+                target: 'http://manage.myyqd.com/api/v1',
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/slsAdminApi': ''
+                    '^/api': ''
                 }
             },
 	        '/slsAdminQiniu': {

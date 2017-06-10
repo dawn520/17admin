@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
 
 			//判断当前用户是否拥有目标页面访问权限，防止用户强制在地址栏输入访问没有权限的页面
 			if (!web_routers[to.path]) {
-				ElementUI.MessageBox.alert('您没用权限访问此页面！', '访问错误', {
+				ElementUI.MessageBox.alert('您没用有权限访问此页面！', '访问错误', {
 					confirmButtonText: '确定',
 					cancelButtonText : '取消',
 					type             : 'warning'
