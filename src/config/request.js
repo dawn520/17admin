@@ -27,6 +27,10 @@ var request=[{
 	module:'open',
 	name:'第三方接入',
 	list:require('./request/open.js')
+},{
+    module:'shorts',
+    name:'短租模块',
+    list:require('./request/shorts.js')
 }];
 
 module.exports=request;

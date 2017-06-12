@@ -3,4 +3,5 @@ module.exports = {
 	Demo: require('./Demo/'),
 	Adv: require('./Adv/'),
 	Components: require('./Components/'),
+	Admin:require('./Admin/'),
 };

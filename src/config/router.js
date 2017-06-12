@@ -30,4 +30,4 @@ module.exports = [{
 	.concat(require('./router/components.js'))
 	.concat(require('./router/adv.js'))
 	//此处增加模块！
-    .concat(require('./router/admin.js'))
+    .concat(require('./router/admin.js'));

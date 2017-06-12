@@ -25,8 +25,8 @@ module.exports = {
             },
 
             data: {
-                username: '',
-                password: '',
+                username: 'admin',
+                password: 'zcx943172',
                 grant_type: gbs.grant_type,
                 client_id: gbs.client_id,
                 client_secret: gbs.client_secret
@@ -110,33 +110,17 @@ module.exports = {
                                 remumber_flag: this.remumber.remumber_flag,
                                 remumber_login_info: {
                                     username: this[ref].username,
-                                    token: data.userinfo.token
+                                    token: data.userinfo.token_type + data.userinfo.access_token
                                 }
                             });
                         } else {
                             this.$store.dispatch('remove_remumber');
                         }
-
-                        // this.$set(data.userinfo, 'access', ['/adv', '/demo/user', '/demo/user/list']);
-                        try {
-                            data.userinfo.web_routers = JSON.parse(data.userinfo.web_routers) ? JSON.parse(data.userinfo.web_routers) : {};
-                        } catch (e) {
-                            data.userinfo.web_routers = {};
-                        }
-                        try {
-                            data.userinfo.api_routers = JSON.parse(data.userinfo.api_routers) ? JSON.parse(data.userinfo.api_routers) : {};
-                        } catch (e) {
-                            data.userinfo.api_routers = {};
-                        }
                         this.$store.dispatch('update_userinfo', {
                             userinfo: data.userinfo
                         }).then(() => {
                             this.login_actions.disabled = false;
-                            if (data.userinfo.default_web_routers) {
-                                this.$router.push(data.userinfo.default_web_routers);
-                            } else {
-                                this.$router.push('/function/open/echarts');
-                            }
+                            this.$router.push('/admin/shorts/slide');
                         });
                     }, {
                         errFn: () => {

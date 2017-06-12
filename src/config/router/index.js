@@ -5,5 +5,6 @@ module.exports={
 	adv:require('./adv'),
 	demo:require('./demo'),
 	function:require('./function'),
-	components:require('./components')
+	components:require('./components'),
+	admin:require('./admin'),
 };

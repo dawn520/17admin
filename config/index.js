@@ -24,6 +24,7 @@ module.exports = {
         proxyTable: {
             '/api': {
                 target: 'http://manage.myyqd.com/api/v1',
+                //target:'http://slsadmin.api.sailengsi.com',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''

@@ -40,6 +40,7 @@ router.beforeEach((to, from, next) => {
 
 	var userinfo = store.state.user.userinfo;
 
+
 	if (!userinfo.token && to.path !== '/login') {
 		store.dispatch('remove_userinfo');
 		next('/login');
