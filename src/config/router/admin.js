@@ -23,12 +23,24 @@ module.exports = [{
             path: 'slide',
             name: '轮播图',
             icon: 'reorder',
-            component: Modules.Demo.User.List
-        }, {
-            path: 'others',
-            name: '编辑用户',
-            icon: 'edit',
-            component: Modules.Demo.User.Edit
+            component: Modules.Admin.Shorts.Slide.List
+        },{
+            path: 'uploadSlide',
+            name: '上传轮播图',
+            icon: 'upload',
+            component: Modules.Admin.Shorts.Slide.Upload
+        }]
+    },{
+        path: 'identity',
+        name: '认证',
+        icon: 'inbox',
+        component: Content,
+        redirect: '/admin/identity',
+        children: [{
+            path: 'list',
+            name: '认证列表',
+            icon: 'reorder',
+            component: Modules.Admin.Identity.List
         }]
     }]
 }];

@@ -21,7 +21,7 @@ module.exports = [
 	},
 	{
 		name  : '获取用户列表',
-		method: 'selectUser',
+		method: 'selectUser1111',
 		path  : '/User/selectUser',
 		type  : 'get',
 	},

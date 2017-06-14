@@ -31,6 +31,10 @@ var request=[{
     module:'shorts',
     name:'短租模块',
     list:require('./request/shorts.js')
+},{
+    module:'identity',
+    name:'认证管理',
+    list:require('./request/identity.js')
 }];
 
 module.exports=request;

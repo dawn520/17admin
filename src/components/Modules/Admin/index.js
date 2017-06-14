@@ -1,3 +1,4 @@
 module.exports = {
-    Shorts: require('./Shorts/')
+    Shorts: require('./Shorts/'),
+    Identity: require('./Identity/')
 };
