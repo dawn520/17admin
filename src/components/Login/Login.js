@@ -25,8 +25,8 @@ module.exports = {
             },
 
             data: {
-                username: 'admin',
-                password: 'zcx943172',
+                username: '',
+                password: '',
                 grant_type: gbs.grant_type,
                 client_id: gbs.client_id,
                 client_secret: gbs.client_secret

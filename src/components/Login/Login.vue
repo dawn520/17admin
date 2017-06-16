@@ -14,9 +14,10 @@
                             <span
                                     :class="[{active:register===false}]"
                                     @click="toggleStatus(false)">17duu后台管理系统系统登录</span>
+                           <!--
                             <span
                                     :class="[{active:register===true}]"
-                                    @click="toggleStatus(true)">注册账号</span>
+                                    @click="toggleStatus(true)">注册账号</span>-->
                         </h3>
                         <el-form-item
                                 prop='username'>
