@@ -35,6 +35,10 @@ var request=[{
     module:'identity',
     name:'认证管理',
     list:require('./request/identity.js')
+},{
+    module:'withdrawals',
+    name:'认证管理',
+    list:require('./request/withdrawals.js')
 }];
 
 module.exports=request;

@@ -24,13 +24,13 @@ module.exports = [{
             name: '轮播图',
             icon: 'reorder',
             component: Modules.Admin.Shorts.Slide.List
-        },{
+        }, {
             path: 'uploadSlide',
             name: '上传轮播图',
             icon: 'upload',
             component: Modules.Admin.Shorts.Slide.Upload
         }]
-    },{
+    }, {
         path: 'identity',
         name: '认证',
         icon: 'inbox',
@@ -42,5 +42,17 @@ module.exports = [{
             icon: 'reorder',
             component: Modules.Admin.Identity.List
         }]
-    }]
+    }, {
+        path: 'withdrawal',
+        name: '提现',
+        icon: 'inbox',
+        component: Content,
+        redirect: '/admin/withdrawal',
+        children: [{
+            path: 'list',
+            name: '提现列表',
+            icon: 'reorder',
+            component: Modules.Admin.Withdrawal.List
+        }]
+    }],
 }];
