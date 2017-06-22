@@ -46,7 +46,7 @@
                     align="center"
                     :sortable="false">
                 <template scope="scope">
-                    {{scope.row.type == 1 ? 'web' : 'pc'}}
+                    {{scope.row.type == 1 ? 'app' : 'web'}}
                 </template>
             </el-table-column>
             <el-table-column
