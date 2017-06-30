@@ -19,18 +19,15 @@ module.exports = {
             statusfulters: [{
                 text: '已经提交审核',
                 value: 0
-            }, {
-                text: '审核中',
+            },  {
+                text: '审核不通过',
                 value: 1
             }, {
-                text: '审核不通过',
+                text: '审核通过',
                 value: 2
             }, {
-                text: '审核通过',
-                value: 3
-            }, {
                 text: '已提现',
-                value: 4
+                value: 3
             }],
             form:{},
             id:0,
@@ -151,15 +148,12 @@ module.exports = {
                             data.list[i].stateText = '已经提交审核';
                             break;
                         case  1 :
-                            data.list[i].stateText = '审核中';
-                            break;
-                        case  2 :
                             data.list[i].stateText = '审核不通过';
                             break;
-                        case  3 :
+                        case  2 :
                             data.list[i].stateText = '审核通过';
                             break;
-                        case  4 :
+                        case  3 :
                             data.list[i].stateText = '已提现';
                             break;
                         default:
@@ -203,19 +197,16 @@ module.exports = {
                     this.slide_list[this.index].stateText = '已经提交审核';
                     break;
                 case  1 :
-                    this.slide_list[this.index].stateText = '审核中';
-                    break;
-                case  2 :
                     this.slide_list[this.index].stateText = '审核不通过';
                     break;
-                case  3 :
+                case  2 :
                     this.slide_list[this.index].stateText = '审核通过';
                     break;
-                case  4 :
-                    this.slide_list[this.index].stateText = '认证被撤销';
+                case  3 :
+                    this.slide_list[this.index].stateText = '已提现';
                     break;
                 default:
-                    this.slide_list[this.index].stateText = '已提现';
+                    this.slide_list[this.index].stateText = '状态错误';
             }
             var data = {
                 httpResourceUrl: '/' + this.id,

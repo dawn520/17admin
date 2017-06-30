@@ -78,10 +78,9 @@
             <el-form :model="form">
                 <el-radio-group v-model="radio">
                     <el-radio :label="0">已经提交审核</el-radio>
-                    <el-radio :label="1">审核中</el-radio>
-                    <el-radio :label="2">审核不通过</el-radio>
-                    <el-radio :label="3">审核通过</el-radio>
-                    <el-radio :label="4">已提现</el-radio>
+                    <el-radio :label="1">审核不通过</el-radio>
+                    <el-radio :label="2">审核通过</el-radio>
+                    <el-radio :label="3">已提现</el-radio>
                 </el-radio-group>
             </el-form>
             <span slot="footer" class="dialog-footer">
