@@ -18,7 +18,7 @@ var request=[{
 },{
 	module:'order',
 	name:'订单管理',
-	list:require('./request/order.js')
+	list:require('./request/order1.js')
 },{
 	module:'system',
 	name:'系统设置',
@@ -37,8 +37,12 @@ var request=[{
     list:require('./request/identity.js')
 },{
     module:'withdrawals',
-    name:'认证管理',
+    name:'提现管理',
     list:require('./request/withdrawals.js')
+},{
+    module:'orders',
+    name:'订单管理',
+    list:require('./request/order.js')
 }];
 
 module.exports=request;

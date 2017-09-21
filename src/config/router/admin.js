@@ -54,5 +54,17 @@ module.exports = [{
             icon: 'reorder',
             component: Modules.Admin.Withdrawal.List
         }]
+    },{
+        path: 'order',
+        name: '订单',
+        icon: 'inbox',
+        component: Content,
+        redirect: '/admin/order',
+        children: [{
+            path: 'list',
+            name: '人工介入',
+            icon: 'reorder',
+            component: Modules.Admin.Order.List
+        }]
     }],
 }];

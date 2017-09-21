@@ -63,7 +63,10 @@ module.exports = function (type, url, data, fn, {
         if (res.data.status === 200) {
             // console.dir(res.data);
             fn(res.data.data);
-        } else {
+        }else if(res.data.status === 401){
+            this.$store.dispatch('remove_userinfo');
+            this.$router.push('/login');
+        }  else {
 
             if (cbFn) {
                 cbFn(res.data);

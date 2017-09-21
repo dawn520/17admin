@@ -2,27 +2,25 @@
  * Created by sailengsi on 2017/4/30.
  */
 /**
- * 订单管理
+ * 认证管理
  * @type {Object}
  */
 module.exports = [
 	{
-		name:'统计订单',
-		method:'statisOrder',
-		path:'/Order/statisOrder',
-		type:'get',
-	},
-	{
 		name:'获取订单列表',
-		method:'selectOrder',
-		path:'/Order/selectOrder',
+		method:'orderList',
+		path:'orders',
 		type:'get',
-	},
-
-	{
-		name:'添加订单',
-		method:'saveOrder',
-		path:'/Order/saveOrder',
-		type:'post',
-	}
+	}, {
+        name:'修改订单',
+        method:'orderCheck',
+        path:'orders/judge',
+        type:'put',
+    },
+    {
+        name:'修改订单',
+        method:'order',
+        path:'orders',
+        type:'get',
+    }
 ];
