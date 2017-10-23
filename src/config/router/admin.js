@@ -66,5 +66,29 @@ module.exports = [{
             icon: 'reorder',
             component: Modules.Admin.Order.List
         }]
+    },{
+        path: 'user',
+        name: '用户管理',
+        icon: 'inbox',
+        component: Content,
+        redirect: '/admin/user/list',
+        children: [{
+            path: 'list',
+            name: '用户列表',
+            icon: 'reorder',
+            component: Modules.Admin.User.List
+        }, {
+            path: 'edit',
+            name: '编辑用户',
+            icon: 'edit',
+            component: Modules.Admin.User.Edit
+        }, {
+            path: 'access',
+            hidden:true,
+            name: '设置权限',
+            icon: 'edit',
+            component: Modules.Admin.User.Access
+        }]
     }],
+
 }];

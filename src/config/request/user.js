@@ -21,11 +21,10 @@ module.exports = [
 	},
 	{
 		name  : '获取用户列表',
-		method: 'selectUser1111',
-		path  : '/User/selectUser',
+		method: 'selectUser',
+		path  : '/users',
 		type  : 'get',
 	},
-
 	{
 		name  : '添加修改用户公用接口',
 		method: 'saveUser',

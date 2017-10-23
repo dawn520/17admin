@@ -191,30 +191,34 @@ module.exports = {
          */
         edit(){
             this.dialogEdit = false;
-            this.slide_list[this.index].state = this.radio;
-            switch (this.radio) {
-                case 0:
-                    this.slide_list[this.index].stateText = '已经提交审核';
-                    break;
-                case  1 :
-                    this.slide_list[this.index].stateText = '审核不通过';
-                    break;
-                case  2 :
-                    this.slide_list[this.index].stateText = '审核通过';
-                    break;
-                case  3 :
-                    this.slide_list[this.index].stateText = '已提现';
-                    break;
-                default:
-                    this.slide_list[this.index].stateText = '状态错误';
-            }
+
             var data = {
                 httpResourceUrl: '/' + this.id,
                 id: this.id,
                 state: this.radio,
             };
             this.$$api_withdrawals_withdrawalsEdit(data, () => {
-                this.$message.success('修改成功！');
+                if (data.status == 200) {
+                    this.slide_list[this.index].state = this.radio;
+                    switch (this.radio) {
+                        case 0:
+                            this.slide_list[this.index].stateText = '已经提交审核';
+                            break;
+                        case  1 :
+                            this.slide_list[this.index].stateText = '审核不通过';
+                            break;
+                        case  2 :
+                            this.slide_list[this.index].stateText = '审核通过';
+                            break;
+                        case  3 :
+                            this.slide_list[this.index].stateText = '已提现';
+                            break;
+                        default:
+                            this.slide_list[this.index].stateText = '状态错误';
+                    }
+                    this.$message.success('修改成功！');
+                }
+
             });
         }
     },
