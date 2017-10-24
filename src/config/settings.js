@@ -10,7 +10,7 @@ var settings = {
         grant_type:'password',
         client_id:2,
 		client_secret:'srnXFMr6y6wft94cBc2Qj4dmEOoaNfXqerIIcax5',
-        image_host:'http://images.17duu.com'
+        image_host:'http://images-dev.17duu.com'
 	},
 
 	//回调
