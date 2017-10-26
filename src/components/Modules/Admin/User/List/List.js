@@ -413,7 +413,6 @@ module.exports = {
             this.dialog.user_info = user;
         },
 
-
         /**
          * 获取用户信息列表方法
          */
