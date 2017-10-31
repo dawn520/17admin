@@ -89,6 +89,23 @@ module.exports = [{
             icon: 'edit',
             component: Modules.Admin.User.Access
         }]
+    },{
+        path: 'article',
+        name: '头条管理',
+        icon: 'inbox',
+        component: Content,
+        redirect: '/admin/article/list',
+        children: [{
+            path: 'list',
+            name: '头条列表',
+            icon: 'reorder',
+            component: Modules.Admin.Article.List
+        }, {
+            path: 'edit',
+            name: '编辑头条',
+            icon: 'edit',
+            component: Modules.Admin.Article.Edit
+        }]
     }],
 
 }];

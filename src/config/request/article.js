@@ -14,8 +14,8 @@ module.exports = [
 	},
 	{
 		name:'添加/修改文章',
-		method:'saveArticle',
-		path:'/Article/saveArticle',
+		method:'articles',
+		path:'articles',
 		type:'post',
 	},
 
