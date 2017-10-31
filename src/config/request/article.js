@@ -9,7 +9,7 @@ module.exports = [
 	{
 		name:'获取文章列表',
 		method:'selectArticle',
-		path:'/Article/selectArticle',
+		path:'articles',
 		type:'get',
 	},
 	{
@@ -22,13 +22,13 @@ module.exports = [
 	{
 		name:'删除文章',
 		method:'deleteArticle',
-		path:'/Article/deleteArticle',
-		type:'post',
+		path:'/articles',
+		type:'delete',
 	},
 	{
 		name:'查看文章详情',
 		method:'findArticle',
-		path:'/Article/findArticle',
+		path:'/articles',
 		type:'get',
 	}
 ];

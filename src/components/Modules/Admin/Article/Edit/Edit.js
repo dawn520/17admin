@@ -12,13 +12,15 @@ module.exports = {
             },
             dialogImageUrl: '',
             dialogVisible: false,
+            formLoading:false,
+            fileList: [],
             headers: {
                 Authorization: this.$store.state.user.userinfo.token_type + ' ' + this.$store.state.user.userinfo.token
             },
             article_data: {
                 title: '',
                 cate: '',
-                tags: '对对对',
+                tags: '',
                 cover: 0,
                 content: '',
             },
@@ -99,8 +101,7 @@ module.exports = {
         setContent(html, text) {
             this.article_data.content = html;
             this.temp.content = text;
-        }
-        ,
+        },
         reset_article(article) {
             this.$refs[article].resetFields();
         },
@@ -124,9 +125,11 @@ module.exports = {
         }
     },
 
+
     mounted() {
         var self = this;
         var editor = new wangEditor('article');
+        this.formLoading = true;
 
         // console.log(editor.config);
 
@@ -185,17 +188,25 @@ module.exports = {
 
         if (this.$route.query.id) {
             var data = {
+                httpResourceUrl: '/' + this.$route.query.id,
                 id: this.$route.query.id
             };
             this.$$api_article_findArticle(data, (data) => {
                 // console.log(data);
-
-                this.article_data = data.article_info;
-                this.article_data.status = data.article_info.status == 1 ? true : false;
-                this.article_data.tabs = data.article_info.tabs.split(',');
-
+                this.fileList = [{
+                    name: data.cover.url,
+                    url: gbs.image_host + '/' + data.cover.url
+                },];
+                this.article_data = data;
+                this.article_data.cover = data.cover.id;
+                this.temp.content = this.article_data.content;
                 $("#article").html(this.article_data.content);
+                this.formLoading = false;
             });
+        }else{
+            this.formLoading = false;
         }
+
+        console.log('assaas');
     }
 }

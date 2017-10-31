@@ -3,6 +3,7 @@
         <el-form label-width="100px" style="margin:20px;width:90%;min-width:600px;"
                  :model="article_data"
                  :rules="rules"
+                 v-loading="formLoading"
                  ref='refArticle'>
             <el-form-item label="文章标题" prop='title' style="width:600px;">
                 <el-input v-model="article_data.title"></el-input>
@@ -22,6 +23,7 @@
                             :data="postData"
                             :headers="headers"
                             list-type="picture-card"
+                            :file-list="fileList"
                             :on-preview="handlePictureCardPreview"
                             :on-remove="handleRemove"
                             :on-success="uploadSuccess"
