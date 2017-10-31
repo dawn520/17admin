@@ -9,7 +9,7 @@
                 <el-input v-model="article_data.title"></el-input>
             </el-form-item>
             <el-form-item label="文章内容" style="width:986px;" prop='content'>
-                <div id="article" style="height:260px;"></div>
+                <div id="article" style="height:640px;"></div>
             </el-form-item>
             <el-form-item label="文章标签" prop='tags'>
                 <el-input v-model="article_data.tags"></el-input>

@@ -1,6 +1,4 @@
-import {
-    gbs
-} from 'config/settings.js';
+import {gbs} from 'config/settings.js';
 
 module.exports = {
     name: 'edit-article',
@@ -12,11 +10,13 @@ module.exports = {
             },
             dialogImageUrl: '',
             dialogVisible: false,
-            formLoading:false,
+            formLoading: false,
             fileList: [],
             headers: {
                 Authorization: this.$store.state.user.userinfo.token_type + ' ' + this.$store.state.user.userinfo.token
             },
+
+
             article_data: {
                 title: '',
                 cate: '',
@@ -65,6 +65,7 @@ module.exports = {
             }
         }
     },
+
     methods: {
         /**
          * 提交表单
@@ -84,6 +85,7 @@ module.exports = {
                     // console.log(this.temp.content);
 
                     // return;
+
 
                     if (!this.temp.content) {
                         if ((this.article_data.content.indexOf('<iframe') == -1 || this.article_data.content.indexOf('</iframe>') == -1) && (this.article_data.content.indexOf('<img') == -1)) {
@@ -125,25 +127,25 @@ module.exports = {
         }
     },
 
-
     mounted() {
         var self = this;
         var editor = new wangEditor('article');
         this.formLoading = true;
 
-        // console.log(editor.config);
+         console.log(editor.config);
 
         // editor.config.jsFilter = false;
 
-        editor.config.uploadImgFileName = 'article';
+        editor.config.uploadImgFileName = 'images';
 
-        editor.config.uploadImgUrl = gbs.host + '/Article/editUpload';
+        editor.config.uploadImgUrl = this.url;
 
         // 配置自定义参数（举例）
         editor.config.uploadParams = {
-            token: this.$store.state.user.userinfo.token,
-            username: this.$store.state.user.userinfo.username
+            type: 14,
         };
+        console.log(this.headers);
+        editor.config.uploadHeaders = this.headers;
 
         // 自定义load事件
         editor.config.uploadImgFns.onload = (data) => {
@@ -152,7 +154,14 @@ module.exports = {
                 var originalName = editor.uploadImgOriginalName || '';
 
                 // 如果 resultText 是图片的url地址，可以这样插入图片：
-                editor.command(null, 'insertHtml', '<img src="' + data.data.fileinfo.getSaveName + '" alt="' + originalName + '" style="max-width:100%;"/>');
+                editor.command(null, 'insertHtml',
+                    '<img src="'
+                    + gbs.image_host
+                    + '/'
+                    + data.data.dirname
+                    + '/'
+                    + data.data.basename
+                    + '" alt="' + originalName + '" style="max-width:100%;"/>');
             } else {
                 if (data.status === 404) {
                     this.$message.error('上传错误信息：token无效！');
@@ -185,7 +194,7 @@ module.exports = {
 
         //自定义上传图片错误事件
         editor.create();
-
+        $("#article").height(540);
         if (this.$route.query.id) {
             var data = {
                 httpResourceUrl: '/' + this.$route.query.id,
@@ -203,10 +212,8 @@ module.exports = {
                 $("#article").html(this.article_data.content);
                 this.formLoading = false;
             });
-        }else{
+        } else {
             this.formLoading = false;
         }
-
-        console.log('assaas');
     }
 }
