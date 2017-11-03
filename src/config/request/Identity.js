@@ -1,7 +1,4 @@
 /**
- * Created by sailengsi on 2017/4/30.
- */
-/**
  * 认证管理
  * @type {Object}
  */

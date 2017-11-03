@@ -29,5 +29,11 @@ module.exports = [
         method:'uploadSlides',
         path:'slides',
         type:'post',
-    }
+    },
+    {
+        name:'获取更新',
+        method:'getUpgrade',
+        path:'upgrade',
+        type:'get',
+    },
 ];

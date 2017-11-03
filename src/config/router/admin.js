@@ -15,7 +15,7 @@ module.exports = [{
     redirect: '/admin/shorts',
     children: [{
         path: 'shorts',
-        name: '短租设置',
+        name: '设置',
         icon: 'inbox',
         component: Content,
         redirect: '/admin/shorts/slide',
@@ -29,6 +29,16 @@ module.exports = [{
             name: '上传轮播图',
             icon: 'upload',
             component: Modules.Admin.Shorts.Slide.Upload
+        }, {
+            path: 'uploadPicture',
+            name: '上传图片',
+            icon: 'upload',
+            component: Modules.Admin.Shorts.Picture.Upload
+        }, {
+            path: 'update',
+            name: '更新设置',
+            icon: 'upload',
+            component: Modules.Admin.Shorts.Update.Edit
         }]
     }, {
         path: 'identity',

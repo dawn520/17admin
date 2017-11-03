@@ -1,22 +1,7 @@
 <template>
     <div class="list">
         <el-row>
-            <el-col :span="4">
-                <el-radio class="radio" v-model="uploadData.type" label="1">app端</el-radio>
-                <el-radio class="radio" v-model="uploadData.type" label="2">web端</el-radio>
-            </el-col>
-            <el-col :span="3">
-                <el-row>
-                    <el-input v-model="uploadData.sort" placeholder="排序"></el-input>
-                </el-row>
-            </el-col>
-            <el-col :span="7">
-                <el-row>
-                    <el-input v-model="uploadData.to" placeholder="跳转链接"></el-input>
-                </el-row>
-            </el-col>
-            <el-col :span="10">
-            </el-col>
+            <el-col :span="24"><div class="grid-content bg-purple-dark">上传图片到服务器</div></el-col>
         </el-row>
         <el-row>
             <el-upload
@@ -27,7 +12,7 @@
                     :action="url"
                     :on-preview="handlePreview"
                     :on-remove="handleRemove"
-                    :file-list="fileList2"
+                    :file-list="fileList"
                     :on-success="handleSuccess"
                     list-type="picture">
 

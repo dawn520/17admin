@@ -1,7 +1,7 @@
 import {gbs} from 'config/settings.js';
 
 module.exports = {
-    name: 'edit-article',
+    name: 'setting-update',
     data() {
         return {
             url: gbs.host + '/image',
@@ -18,37 +18,41 @@ module.exports = {
 
 
             article_data: {
-                title: '',
-                cate: '',
-                tags: '',
-                cover: 0,
-                content: '',
+                ios: {
+                    version: "1.0.0",
+                    forcible: true,
+                    description: ""
+                },
+                android: {
+                    version: "1.0.0",
+                    forcible: true,
+                    description: ""
+                },
+                web: {
+                    version: "1.0.0",
+                    forcible: true,
+                    description: ""
+                }
             },
             temp: {
                 content: ''
             },
             rules: {
-                title: [{
+                ios_version: [{
                     required: true,
-                    message: '文章标题不能为空！',
+                    message: '版本不能为空！',
                     trigger: 'blur'
                 }],
-                tags: [{
+                android_version: [{
                     required: true,
-                    message: '请至少添加一个文章标签！',
-                    trigger: 'change'
-                }],
-                content: [{
-                    required: true,
-                    message: '文章不能为空！',
+                    message: '版本不能为空！',
                     trigger: 'blur'
                 }],
-                cover: [{
-                    min: 1,
+                web_version: [{
                     required: true,
-                    message: '封面不能为空！',
+                    message: '版本不能为空！',
                     trigger: 'blur'
-                }]
+                }],
             },
             wangEditor: {
                 bar: [
@@ -56,8 +60,8 @@ module.exports = {
                     'bold', 'underline', 'italic', 'strikethrough', 'eraser', 'forecolor', 'bgcolor', '|',
                     'quote', 'fontfamily', 'fontsize', 'head', 'unorderlist', 'orderlist', 'alignleft', 'aligncenter', 'alignright', '|',
                     'link', 'unlink', 'table', 'emotion', '|',
-                    'img',
-                    'video',
+                    // 'img',
+                    // 'video',
                     // 'location',
                     'insertcode', '|',
                     'undo', 'redo', 'fullscreen'
@@ -73,10 +77,6 @@ module.exports = {
          */
         onSubmit(formName) {
 
-            if (this.article_data.cover == 0) {
-                alert('请选择封面图片');
-                return false;
-            }
 
             var ref = this.$refs[formName];
             ref.validate((valid) => {
@@ -94,7 +94,7 @@ module.exports = {
                         }
                         return;
                     }
-                    this.$$api_article_articles(this.article_data, data => {
+                    this.$$api_shorts_getUpgrade(this.article_data, data => {
                         this.$router.push('/admin/article/list');
                     });
                 }
@@ -107,34 +107,15 @@ module.exports = {
         reset_article(article) {
             this.$refs[article].resetFields();
         },
-
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
-            this.article_data.cover = 0;
-        },
-        handlePictureCardPreview(file) {
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
-        },
-        uploadSuccess(response, file, fileList) {
-            this.article_data.cover = response.data.id;
-        },
-        uploadBefore(file) {
-            if (this.article_data.cover != 0) {
-                this.$message('封面只能传一张！');
-                return false;
-            }
-        }
     },
 
     mounted() {
         var self = this;
-        var editor = new wangEditor('article');
+        var editor = new wangEditor('description_ios');
+        var editor2 = new wangEditor('description_android');
+        var editor3 = new wangEditor('description_web');
+
         this.formLoading = true;
-
-         console.log(editor.config);
-
-        // editor.config.jsFilter = false;
 
         editor.config.uploadImgFileName = 'images';
 
@@ -144,7 +125,6 @@ module.exports = {
         editor.config.uploadParams = {
             type: 14,
         };
-        console.log(this.headers);
         editor.config.uploadHeaders = this.headers;
 
         // 自定义load事件
@@ -171,15 +151,16 @@ module.exports = {
             }
 
         };
-
         editor.config.uploadImgFns.onerror = (xhr) => {
             this.$message.error('上传错误信息：网络错误！');
         };
-
         editor.config.menus = this.wangEditor.bar;
 
+        editor2.config = editor3.config = editor.config;
+
+
         //编辑器改变事件时，同步更新文章内容
-        editor.onchange = function () {
+        editor2.onchange = editor3.onchange = editor.onchange = function () {
 
             var text = this.$txt.text().replace(/(^\s*)|(\s*$)/g, ""),
                 html = this.$txt.html();
@@ -194,7 +175,11 @@ module.exports = {
 
         //自定义上传图片错误事件
         editor.create();
-        $("#article").height(540);
+        editor2.create();
+        editor3.create();
+        $("#description_ios").height(200);
+        $("#description_android").height(200);
+        $("#description_web").height(200);
         if (this.$route.query.id) {
             var data = {
                 httpResourceUrl: '/' + this.$route.query.id,
@@ -209,7 +194,9 @@ module.exports = {
                 this.article_data = data;
                 this.article_data.cover = data.cover.id;
                 this.temp.content = this.article_data.content;
-                $("#article").html(this.article_data.content);
+                $("#description_ios").html(this.article_data.ios.description);
+                $("#description_android").html(this.article_data.android.description);
+                $("#description_web").html(this.article_data.web.description);
                 this.formLoading = false;
             });
         } else {

@@ -50,13 +50,6 @@
                 </template>
             </el-table-column>
             <el-table-column
-                    prop="to"
-                    label="链接"
-                    align="center"
-                    width="400"
-                    :sortable="false">
-            </el-table-column>
-            <el-table-column
                     prop="created_at"
                     label="创建时间"
                     align="center"

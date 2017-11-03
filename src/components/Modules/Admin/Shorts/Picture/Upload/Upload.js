@@ -4,16 +4,14 @@ module.exports = {
     name: 'upload',
     data() {
         return {
-            url: gbs.host + '/slides',
+            url: gbs.host + '/image',
             headers: {
                 Authorization: this.$store.state.user.userinfo.token_type + ' ' + this.$store.state.user.userinfo.token
             },
             uploadData: {
-                type: '1',
-                sort: 99,
-                to: ''
+                type: '99',
             },
-            fileList2: [],
+            fileList: [],
         }
     },
     methods: {
@@ -25,11 +23,11 @@ module.exports = {
         },
         handleSuccess: function (response, file, fileList) {
             if (response.status == 200) {
-                this.uploadData.to = '';
                 this.$message({
                     message: '上传成功！',
                     type: 'success'
                 });
+                fileList[fileList.length - 1].name = gbs.image_host + '/' + response.data.dirname + '/' + response.data.basename;
             } else {
                 fileList.pop();
                 this.$message({
