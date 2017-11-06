@@ -13,12 +13,17 @@ module.exports = [
 		type:'get',
 	},
 	{
-		name:'添加/修改文章',
+		name:'添加',
 		method:'articles',
 		path:'articles',
 		type:'post',
 	},
-
+    {
+        name:'添加',
+        method:'editArticles',
+        path:'articles',
+        type:'patch',
+    },
 	{
 		name:'删除文章',
 		method:'deleteArticle',

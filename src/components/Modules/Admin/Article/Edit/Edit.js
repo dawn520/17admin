@@ -15,8 +15,6 @@ module.exports = {
             headers: {
                 Authorization: this.$store.state.user.userinfo.token_type + ' ' + this.$store.state.user.userinfo.token
             },
-
-
             article_data: {
                 title: '',
                 cate: '',
@@ -31,12 +29,19 @@ module.exports = {
                 title: [{
                     required: true,
                     message: '文章标题不能为空！',
-                    trigger: 'blur'
+                    trigger: 'blur',
+                    min:2,
+                    max:80
+                },{
+                    min:20,
+                    max:80,
+                    message: '文章标题为2-80个字符！',
+                    trigger: 'blur',
                 }],
                 tags: [{
                     required: true,
                     message: '请至少添加一个文章标签！',
-                    trigger: 'change'
+                    trigger: 'change',
                 }],
                 content: [{
                     required: true,
@@ -94,9 +99,16 @@ module.exports = {
                         }
                         return;
                     }
-                    this.$$api_article_articles(this.article_data, data => {
-                        this.$router.push('/admin/article/list');
-                    });
+                    if (this.$route.query.id) {
+                        this.article_data.httpResourceUrl = '/' + this.$route.query.id;
+                        this.$$api_article_editArticles(this.article_data, data => {
+                            this.$router.push('/admin/article/list');
+                        });
+                    } else {
+                        this.$$api_article_articles(this.article_data, data => {
+                            this.$router.push('/admin/article/list');
+                        });
+                    }
                 }
             });
         },
@@ -132,7 +144,7 @@ module.exports = {
         var editor = new wangEditor('article');
         this.formLoading = true;
 
-         console.log(editor.config);
+        console.log(editor.config);
 
         // editor.config.jsFilter = false;
 
