@@ -8,8 +8,7 @@ module.exports = {
             postData: {
                 type: '14'
             },
-            dialogImageUrl: '',
-            dialogVisible: false,
+
             formLoading: false,
             fileList: [],
             headers: {
@@ -35,24 +34,22 @@ module.exports = {
                 }
             },
             temp: {
-                content: ''
+                ios: {
+                    description: ""
+                },
+                android: {
+                    description: ""
+                },
+                web: {
+                    description: ""
+                }
             },
             rules: {
                 ios_version: [{
                     required: true,
-                    message: '版本不能为空！',
+                    message: '文章标题不能为空！',
                     trigger: 'blur'
-                }],
-                android_version: [{
-                    required: true,
-                    message: '版本不能为空！',
-                    trigger: 'blur'
-                }],
-                web_version: [{
-                    required: true,
-                    message: '版本不能为空！',
-                    trigger: 'blur'
-                }],
+                }]
             },
             wangEditor: {
                 bar: [
@@ -76,33 +73,69 @@ module.exports = {
          * @param  {string} formName 表单名称
          */
         onSubmit(formName) {
-
-
-            var ref = this.$refs[formName];
-            ref.validate((valid) => {
-                if (valid) {
-                    // console.log(this.article_data.content);
-                    // console.log(this.temp.content);
-
-                    // return;
-
-
-                    if (!this.temp.content) {
-                        if ((this.article_data.content.indexOf('<iframe') == -1 || this.article_data.content.indexOf('</iframe>') == -1) && (this.article_data.content.indexOf('<img') == -1)) {
-                            this.$message.error('文章内容不能为空！');
-                            return;
-                        }
-                        return;
-                    }
-                    this.$$api_shorts_getUpgrade(this.article_data, data => {
-                        this.$router.push('/admin/article/list');
-                    });
+            if (this.article_data.ios.version.length == 0) {
+                this.$message('请填写ios版本号！');
+                return false;
+            }
+            if (this.article_data.android.version.length == 0) {
+                this.$message('请填写android版本号！');
+                return false;
+            }
+            if (this.article_data.web.version.length == 0) {
+                this.$message('请填写web版本号！');
+                return false;
+            }
+            var postData = this.article_data;
+            if (this.article_data.ios.forcible == true) {
+                postData.ios.forcible = 1;
+            } else {
+                postData.ios.forcible = 0;
+            }
+            if (this.article_data.android.forcible == true) {
+                postData.android.forcible = 1;
+            } else {
+                postData.android.forcible = 0;
+            }
+            if (this.article_data.web.forcible == true) {
+                postData.web.forcible = 1;
+            } else {
+                postData.web.forcible = 0;
+            }
+            this.formLoading = true;
+            this.$$api_shorts_updateUpgrade(postData, data => {
+                this.$message({
+                    message: '保存成功！',
+                    type: 'success'
+                });
+                this.formLoading = false;
+                if (this.article_data.ios.forcible == 1) {
+                    this.article_data.ios.forcible = true;
+                } else {
+                    this.article_data.ios.forcible = false;
+                }
+                if (this.article_data.android.forcible == true) {
+                    this.article_data.android.forcible = true;
+                } else {
+                    this.article_data.android.forcible = false;
+                }
+                if (this.article_data.web.forcible == true) {
+                    this.article_data.web.forcible = true;
+                } else {
+                    postData.web.forcible = false;
                 }
             });
         },
         setContent(html, text) {
-            this.article_data.content = html;
-            this.temp.content = text;
+            this.article_data.ios.description = html;
+            this.temp.ios.description = text;
+        },
+        setContent2(html, text) {
+            this.article_data.android.description = html;
+            this.temp.android.description = text;
+        },
+        setContent3(html, text) {
+            this.article_data.web.description = html;
+            this.temp.web.description = text;
         },
         reset_article(article) {
             this.$refs[article].resetFields();
@@ -160,15 +193,22 @@ module.exports = {
 
 
         //编辑器改变事件时，同步更新文章内容
-        editor2.onchange = editor3.onchange = editor.onchange = function () {
-
+        editor.onchange = function () {
             var text = this.$txt.text().replace(/(^\s*)|(\s*$)/g, ""),
                 html = this.$txt.html();
-
-            /*console.log(text);
-             console.log(html);*/
-
             self.setContent(html, text);
+        };
+        //编辑器改变事件时，同步更新文章内容
+        editor2.onchange = function () {
+            var text = this.$txt.text().replace(/(^\s*)|(\s*$)/g, ""),
+                html = this.$txt.html();
+            self.setContent2(html, text);
+        };
+        //编辑器改变事件时，同步更新文章内容
+        editor3.onchange = function () {
+            var text = this.$txt.text().replace(/(^\s*)|(\s*$)/g, ""),
+                html = this.$txt.html();
+            self.setContent3(html, text);
         };
 
         // editor.config.hideLinkImg = true;
@@ -180,27 +220,38 @@ module.exports = {
         $("#description_ios").height(200);
         $("#description_android").height(200);
         $("#description_web").height(200);
-        if (this.$route.query.id) {
-            var data = {
-                httpResourceUrl: '/' + this.$route.query.id,
-                id: this.$route.query.id
-            };
-            this.$$api_article_findArticle(data, (data) => {
-                // console.log(data);
-                this.fileList = [{
-                    name: data.cover.url,
-                    url: gbs.image_host + '/' + data.cover.url
-                },];
-                this.article_data = data;
-                this.article_data.cover = data.cover.id;
-                this.temp.content = this.article_data.content;
-                $("#description_ios").html(this.article_data.ios.description);
-                $("#description_android").html(this.article_data.android.description);
-                $("#description_web").html(this.article_data.web.description);
-                this.formLoading = false;
-            });
-        } else {
+
+        var data = {
+            httpResourceUrl: '',
+            id: ''
+        };
+        this.$$api_shorts_getUpgrade(data, (data) => {
+            // console.log(data);
+            this.article_data = data;
+            this.temp.ios.description = this.article_data.ios.description;
+            this.temp.android.description = this.article_data.android.description;
+            this.temp.web.description = this.article_data.web.description;
+
+            if (this.article_data.ios.forcible == 1) {
+                this.article_data.ios.forcible = true;
+            } else {
+                this.article_data.ios.forcible = false;
+            }
+            if (this.article_data.android.forcible == true) {
+                this.article_data.android.forcible = true;
+            } else {
+                this.article_data.android.forcible = false;
+            }
+            if (this.article_data.web.forcible == true) {
+                this.article_data.web.forcible = true;
+            } else {
+                postData.web.forcible = false;
+            }
+
+            $("#description_ios").html(this.article_data.ios.description);
+            $("#description_android").html(this.article_data.android.description);
+            $("#description_web").html(this.article_data.web.description);
             this.formLoading = false;
-        }
+        });
     }
 }

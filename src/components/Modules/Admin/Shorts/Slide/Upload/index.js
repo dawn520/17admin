@@ -1,2 +1,2 @@
-import Upload from './Upload.vue';
+const Upload = resolve => require(['./Upload.vue'],resolve);
 module.exports = Upload;

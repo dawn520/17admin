@@ -36,4 +36,10 @@ module.exports = [
         path:'upgrade',
         type:'get',
     },
+    {
+        name:'获取更新',
+        method:'updateUpgrade',
+        path:'upgrade',
+        type:'put',
+    },
 ];

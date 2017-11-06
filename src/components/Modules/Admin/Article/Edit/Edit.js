@@ -74,7 +74,7 @@ module.exports = {
         onSubmit(formName) {
 
             if (this.article_data.cover == 0) {
-                alert('请选择封面图片');
+                this.$message('请选择封面图片！');
                 return false;
             }
 
