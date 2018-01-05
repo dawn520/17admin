@@ -18,6 +18,7 @@ module.exports = {
             article_data: {
                 title: '',
                 cate: '',
+                sort:99,
                 tags: '',
                 cover: 0,
                 content: '',
@@ -30,13 +31,13 @@ module.exports = {
                     required: true,
                     message: '文章标题不能为空！',
                     trigger: 'blur',
-                    min:2,
-                    max:80
-                },{
-                    min:20,
-                    max:80,
-                    message: '文章标题为2-80个字符！',
-                    trigger: 'blur',
+                    min: 2,
+                    max: 80
+                }],
+                sort: [{
+                    required: true,
+                    message: '请填写排序！',
+                    trigger: 'blur'
                 }],
                 tags: [{
                     required: true,

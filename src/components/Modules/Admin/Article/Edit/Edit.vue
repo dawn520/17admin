@@ -8,6 +8,9 @@
             <el-form-item label="文章标题" prop='title' style="width:600px;">
                 <el-input v-model="article_data.title"></el-input>
             </el-form-item>
+            <el-form-item label="排序" prop='sort' style="width:600px;">
+                <el-input v-model="article_data.sort" placeholder="排序"></el-input>
+            </el-form-item>
             <el-form-item label="文章内容" style="width:986px;" prop='content'>
                 <div id="article" style="height:640px;"></div>
             </el-form-item>

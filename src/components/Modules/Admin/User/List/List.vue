@@ -42,6 +42,12 @@
                     :sortable="true">
             </el-table-column>
             <el-table-column
+                    prop="nickname"
+                    label="昵称"
+                    align="center"
+                    :sortable="true">
+            </el-table-column>
+            <el-table-column
                     prop="phone"
                     label="手机号"
                     align="center"
